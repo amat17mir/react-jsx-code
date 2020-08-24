@@ -1,66 +1,47 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Basics</title>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 <body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class App extends React.Component {
+      state = {
+        book: 'The Alchemist',
+        meeting: 'first'
+      }
+      handleChange = (e) => {
+        this.setState({
+          name: e.target.value
+        })
+      }
+      handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('form submitted', this.state);
+      }
+      render(){
+        return(
+          <div className="app-content">
+            <h1>Welcome to the {this.state.meeting} meeting of Amatullah's book club.</h1>
+            <h2>This meeting, we will be reading {this.state.book}.</h2>
 
-    <div id="app"></div>
+            <h3>Enter your email to join the bookclub.</h3>
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleChange} />
+              <button>Submit</button>
+            </form>
+          </div>
+        )
+      }
+    }
 
-    
-    <script type="text/babel">
-        class App extends React.Component {
-            state = {
-                name: "the next meeting of Amatullah's book club",
-                firstbook: "The Alchemist"
-            }
-            Nextfunc = (e) => {
-                //console.log(e.target);
-                this.setState({
-                    name: "the next meeting of Amatullah's book club",
-                    firstbook: "The Hobbit"
-                })
-            }
-            Prevfunc = (e) => {
-                //console.log(e.target);
-                this.setState({
-                    name: "the first meeting of Amatullah's book club",
-                    firstbook: "Fahrenheit 451"
-                })
-            }
-            Mousefunc = (e) =>{
-                console.log(e.target, e.pageX)
-            }
-            Copyfunc = (e) => {
-                console.log("Paulo Coelho said that you fool.");
-            }
-            
-            render() {
-                return(
-                    <div className = "app-content">
-                        <h1>Literary Book Club</h1>
-                        <p>Welcome to { this.state.name }. We will be reading { this.state.firstbook }!</p>
-                        <button onClick={this.Nextfunc}>Next Book</button>
-                        <button onClick={this.Prevfunc}>Previous Book</button>
-                        <p onCopy={this.Copyfunc}>When you want something, all the universe conspires in helping you to achieve it.</p>
-                        <p>Would you like to join the bookclub? Enter your email.</p>
-                        <form>
-                            <input type="text" />
-                            <button>Submit</button>
-                        </form>
-
-                        </div>
-                 ) 
-            }
-        }
-        
-
-        ReactDOM.render(<App />, document.getElementById('app'));
-    </script>
-    
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
 </body>
 </html>
